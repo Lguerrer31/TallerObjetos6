@@ -44,16 +44,24 @@ public class Cafetera {
     }
 
     public void llenarcafetera() {
-        int a, m, l;
-        a = this.getCapacidad_actual();
-        m = this.getCapacidad_maxima();
-        l = a = m;
+        this.capacidad_actual = this.capacidad_maxima;
+    }
+    
+    public void servirtaza(int a, int b){
+        int aux;
+        aux = this.getCapacidad_actual()-(a * b);
+        this.capacidad_actual = aux;
     }
 
     public void vaciarcafetera() {
-        int v, a;
-        a = this.getCapacidad_actual();
-        v = a = 0;
+       this.capacidad_actual = 0;
+       this.capacidad_maxima = this.getCapacidad_maxima();
+    }
+    
+    public void agregarcafe(int h){
+        int a;
+        a = this.getCapacidad_actual() + h;
+        this.capacidad_actual = a;
     }
     
 }

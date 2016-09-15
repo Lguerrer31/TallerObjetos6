@@ -16,11 +16,16 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
-    
     Cafetera c;
-    
+
     public Principal() {
         initComponents();
+
+        cmdVaciar.setEnabled(false);
+        cmdLlenar.setEnabled(false);
+        cmdAgregar.setEnabled(false);
+        cmdServir.setEnabled(false);
+
     }
 
     /**
@@ -72,15 +77,35 @@ public class Principal extends javax.swing.JFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
 
         txtCTazas.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        txtCTazas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCTazasKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtCTazas, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 60, -1));
 
         txtCActual.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        txtCActual.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCActualKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtCActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, 60, -1));
 
         txtICafe.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        txtICafe.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtICafeKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtICafe, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 60, -1));
 
         txtITaza.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        txtITaza.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtITazaKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtITaza, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 60, -1));
 
         cmdVaciar.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
@@ -133,9 +158,9 @@ public class Principal extends javax.swing.JFrame {
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
 
         txtCMaxima.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        txtCMaxima.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCMaximaActionPerformed(evt);
+        txtCMaxima.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCMaximaKeyTyped(evt);
             }
         });
         jPanel1.add(txtCMaxima, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 60, -1));
@@ -157,55 +182,187 @@ public class Principal extends javax.swing.JFrame {
 
     private void cmdLlenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLlenarActionPerformed
         // TODO add your handling code here:
-        
+
         c.llenarcafetera();
-        
+
+        Helper.mensaje(null, "Cafetera llenada satisfactoriamente", "Mensaje", 1);
+
     }//GEN-LAST:event_cmdLlenarActionPerformed
 
     private void cmdEstablecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEstablecerActionPerformed
         // TODO add your handling code here:
-        
-        int a, b;
-        
-        a = Integer.parseInt(txtCActual.getText());
-        b = Integer.parseInt(txtCMaxima.getText());
-        
-        c = new Cafetera (a, b);
-        
-    }//GEN-LAST:event_cmdEstablecerActionPerformed
 
-    private void txtCMaximaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCMaximaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCMaximaActionPerformed
+        int a = 0, b = 0;
+        int sw = 1;
+
+        try {
+            a = Integer.parseInt(txtCActual.getText());
+            b = Integer.parseInt(txtCMaxima.getText());
+            if (b == 0) {
+                Helper.mensaje(null, "La cantidad máxima no puede ser 0", "Error", 2);
+                txtCMaxima.requestFocusInWindow();
+                txtCMaxima.selectAll();
+                sw = 0;
+            }
+        } catch (NumberFormatException e) {
+            Helper.mensaje(null, "Por favor digite datos validos", "Error", 2);
+            sw = 0;
+        }
+
+        if (sw == 1) {
+            c = new Cafetera(a, b);
+
+            Helper.mensaje(null, "Cafetera creada exitosamente", "Mensaje", 1);
+
+            txtCActual.setEditable(false);
+            txtCActual.setText("");
+            txtCMaxima.setEditable(false);
+            txtCMaxima.setText("");
+            cmdVaciar.setEnabled(true);
+            cmdLlenar.setEnabled(true);
+            cmdAgregar.setEnabled(true);
+            cmdServir.setEnabled(true);
+        }
+
+    }//GEN-LAST:event_cmdEstablecerActionPerformed
 
     private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
         // TODO add your handling code here:
-        
-        int h;
-        
-        h = Integer.parseInt(txtICafe.getText());
-        
-        
+
+        int h = 0;
+        int sw = 1;
+
+        try {
+            h = Integer.parseInt(txtICafe.getText());
+            if (h == 0) {
+                Helper.mensaje(null, "La cantidad máxima no puede ser 0", "Error", 2);
+                txtICafe.requestFocusInWindow();
+                txtICafe.selectAll();
+                sw = 0;
+            }
+        } catch (NumberFormatException e) {
+            Helper.mensaje(null, "Por favor digite datos validos", "Error", 2);
+            sw = 0;
+        }
+
+        if (sw == 1) {
+            c.agregarcafe(h);
+
+            Helper.mensaje(null, "Agregado satisfactoriamente: " + h, "Mensaje", 1);
+        }
+
     }//GEN-LAST:event_cmdAgregarActionPerformed
 
     private void cmdServirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdServirActionPerformed
         // TODO add your handling code here:
-        
-        int j, k;
-        
-        j = Integer.parseInt(txtCTazas.getText());
-        k = Integer.parseInt(txtITaza.getText());
-        
-        
-        
+
+        int j = 0, k = 0;
+        int sw = 1;
+
+        try {
+            j = Integer.parseInt(txtCTazas.getText());
+            if (j == 0) {
+                Helper.mensaje(null, "La cantidad máxima no puede ser 0", "Error", 2);
+                txtCTazas.requestFocusInWindow();
+                txtCTazas.selectAll();
+                sw = 0;
+            }
+            k = Integer.parseInt(txtITaza.getText());
+            if (k == 0) {
+                Helper.mensaje(null, "La cantidad máxima no puede ser 0", "Error", 2);
+                txtITaza.requestFocusInWindow();
+                txtITaza.selectAll();
+                sw = 0;
+            }
+        } catch (NumberFormatException e) {
+            Helper.mensaje(null, "Por favor digite datos validos", "Error", 2);
+            sw = 0;
+        }
+
+        if (sw == 1) {
+            c.servirtaza(j, k);
+
+            Helper.mensaje(null, "Tazas servidas satisfactoriamente", "Mensaje", 1);
+        }
+
+
     }//GEN-LAST:event_cmdServirActionPerformed
 
     private void cmdVaciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdVaciarActionPerformed
         // TODO add your handling code here:
-        
+
         c.vaciarcafetera();
-        
+
+        Helper.mensaje(null, "Cafetera vaciada satisfactoriamente", "Mensaje", 1);
+
+        txtCActual.setEditable(true);
+
     }//GEN-LAST:event_cmdVaciarActionPerformed
+
+    private void txtCMaximaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCMaximaKeyTyped
+        // TODO add your handling code here:
+
+        char c = evt.getKeyChar();
+
+        if (!Character.isDigit(c)) {
+            getToolkit().beep();
+
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_txtCMaximaKeyTyped
+
+    private void txtCActualKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCActualKeyTyped
+        // TODO add your handling code here:
+
+        char c = evt.getKeyChar();
+
+        if (!Character.isDigit(c)) {
+            getToolkit().beep();
+
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_txtCActualKeyTyped
+
+    private void txtICafeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtICafeKeyTyped
+        // TODO add your handling code here:
+
+        char c = evt.getKeyChar();
+
+        if (!Character.isDigit(c)) {
+            getToolkit().beep();
+
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_txtICafeKeyTyped
+
+    private void txtCTazasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCTazasKeyTyped
+        // TODO add your handling code here:
+
+        char c = evt.getKeyChar();
+
+        if (!Character.isDigit(c)) {
+            getToolkit().beep();
+
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_txtCTazasKeyTyped
+
+    private void txtITazaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtITazaKeyTyped
+        // TODO add your handling code here:
+
+        char c = evt.getKeyChar();
+
+        if (!Character.isDigit(c)) {
+            getToolkit().beep();
+
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_txtITazaKeyTyped
 
     /**
      * @param args the command line arguments
