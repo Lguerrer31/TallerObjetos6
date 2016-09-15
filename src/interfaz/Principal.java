@@ -249,6 +249,7 @@ public class Principal extends javax.swing.JFrame {
             c.agregarcafe(h);
 
             Helper.mensaje(null, "Agregado satisfactoriamente: " + h, "Mensaje", 1);
+            txtICafe.setText("");
         }
 
     }//GEN-LAST:event_cmdAgregarActionPerformed
@@ -282,7 +283,9 @@ public class Principal extends javax.swing.JFrame {
         if (sw == 1) {
             c.servirtaza(j, k);
 
-            Helper.mensaje(null, "Tazas servidas satisfactoriamente", "Mensaje", 1);
+            Helper.mensaje(null, "Tazas servidas satisfactoriamente, su nueva cantidad en la cafetera es de: " + c.getCapacidad_actual(), "Mensaje", 1);
+            txtITaza.setText("");
+            txtCTazas.setText("");
         }
 
 
