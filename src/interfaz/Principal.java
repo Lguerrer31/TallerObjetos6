@@ -183,9 +183,9 @@ public class Principal extends javax.swing.JFrame {
     private void cmdLlenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLlenarActionPerformed
         // TODO add your handling code here:
 
-        c.llenarcafetera();
+        c.LlenarCafetera();
 
-        Helper.mensaje(null, "Cafetera llenada satisfactoriamente", "Mensaje", 1);
+        Helper.mensaje(null, "Cafetera llenada satisfactoriamente, su nueva capacidad capcidad actual es: " + c.getCapacidad_actual(), "Mensaje", 1);
 
     }//GEN-LAST:event_cmdLlenarActionPerformed
 
@@ -212,7 +212,7 @@ public class Principal extends javax.swing.JFrame {
         if (sw == 1) {
             c = new Cafetera(a, b);
 
-            Helper.mensaje(null, "Cafetera creada exitosamente", "Mensaje", 1);
+            Helper.mensaje(null, "Cafetera creada exitosamente, su nueva cantidad de cafe es: " + c.getCapacidad_actual(), "Mensaje", 1);
 
             txtCActual.setEditable(false);
             txtCActual.setText("");
@@ -235,7 +235,7 @@ public class Principal extends javax.swing.JFrame {
         try {
             h = Integer.parseInt(txtICafe.getText());
             if (h == 0) {
-                Helper.mensaje(null, "La cantidad máxima no puede ser 0", "Error", 2);
+                Helper.mensaje(null, "La cantidad a agregar no puede ser 0", "Error", 2);
                 txtICafe.requestFocusInWindow();
                 txtICafe.selectAll();
                 sw = 0;
@@ -246,9 +246,9 @@ public class Principal extends javax.swing.JFrame {
         }
 
         if (sw == 1) {
-            c.agregarcafe(h);
+            c.AgregarCafe(h);
 
-            Helper.mensaje(null, "Agregado satisfactoriamente: " + h, "Mensaje", 1);
+            Helper.mensaje(null, "Agregado satisfactoriamente, su nueva cantidad de café es: " + c.getCapacidad_actual() + h, "Mensaje", 1);
             txtICafe.setText("");
         }
 
@@ -263,14 +263,14 @@ public class Principal extends javax.swing.JFrame {
         try {
             j = Integer.parseInt(txtCTazas.getText());
             if (j == 0) {
-                Helper.mensaje(null, "La cantidad máxima no puede ser 0", "Error", 2);
+                Helper.mensaje(null, "La cantidad de tazas a servir 0", "Error", 2);
                 txtCTazas.requestFocusInWindow();
                 txtCTazas.selectAll();
                 sw = 0;
             }
             k = Integer.parseInt(txtITaza.getText());
             if (k == 0) {
-                Helper.mensaje(null, "La cantidad máxima no puede ser 0", "Error", 2);
+                Helper.mensaje(null, "La cantidad a ingresar en cada taza no puede ser 0", "Error", 2);
                 txtITaza.requestFocusInWindow();
                 txtITaza.selectAll();
                 sw = 0;
@@ -281,22 +281,20 @@ public class Principal extends javax.swing.JFrame {
         }
 
         if (sw == 1) {
-            c.servirtaza(j, k);
+            c.ServirTaza(j, k);
 
             Helper.mensaje(null, "Tazas servidas satisfactoriamente, su nueva cantidad en la cafetera es de: " + c.getCapacidad_actual(), "Mensaje", 1);
             txtITaza.setText("");
             txtCTazas.setText("");
         }
-
-
     }//GEN-LAST:event_cmdServirActionPerformed
 
     private void cmdVaciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdVaciarActionPerformed
         // TODO add your handling code here:
 
-        c.vaciarcafetera();
+        c.Vaciar();
 
-        Helper.mensaje(null, "Cafetera vaciada satisfactoriamente", "Mensaje", 1);
+        Helper.mensaje(null, "Cafetera vaciada satisfactoriamente, su nueva capacidad actual es: " + c.getCapacidad_actual(), "Mensaje", 1);
 
         txtCActual.setEditable(true);
 

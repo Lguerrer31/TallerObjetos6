@@ -17,7 +17,7 @@ public class Cafetera {
     public Cafetera(int capacidad_maxima, int capacidad_actual) {
         this.capacidad_maxima = capacidad_maxima;
         this.capacidad_actual = capacidad_actual;
-        if (this.capacidad_actual < this.capacidad_maxima) {
+        if (this.capacidad_actual > this.capacidad_maxima) {
             this.capacidad_actual = this.capacidad_maxima;
             Helper.mensaje(null, "La capacidad actual ha sido ajustada a la maxima", "Mensaje", 1);
 
@@ -47,44 +47,38 @@ public class Cafetera {
         this.capacidad_actual = capacidad_actual;
     }
 
-    public void llenarcafetera() {
-        this.capacidad_actual = this.capacidad_maxima;
-    }
+    public void LlenarCafetera(){
+    this.capacidad_actual = this.capacidad_maxima;
+}
 
-    public void servirtaza(int a, int b) {
-        int aux;
-        int sw = 1;
-        aux = this.getCapacidad_actual() - (a * b);
-        if (this.capacidad_actual == 0) {
-            Helper.mensaje(null, "La cafetera se encuentra vacia", "Error", 2); 
-            sw = 0;
-        } else if (aux < this.capacidad_actual) {
-               Helper.mensaje(null, "La cafetera no tiene la cantidad requerida, se servira lo que alcance", "Error", 2);
-        } else {
-            if (sw == 1){
-            this.capacidad_actual = aux;
-            }
-        } 
-        
-    }
+     public void ServirTaza(int a, int b){
+       int c;
+       c = (a * b) + this.getCapacidad_actual();
+       if (this.capacidad_actual < 0) {
+           this.capacidad_actual = 0;
+       }
+       
+   }
 
-    public void vaciarcafetera() {
-        this.capacidad_actual = 0;
-        this.capacidad_maxima = this.getCapacidad_maxima();
-    }
+     public void Vaciar(){
+       this.capacidad_actual = 0;
+       this.capacidad_actual = this.getCapacidad_maxima();
+   }
 
-    public void agregarcafe(int h) {
+   public void AgregarCafe(int d){
         int a;
-        if (h > getCapacidad_maxima()) {
+        if (d > getCapacidad_maxima()) {
             this.capacidad_actual = this.capacidad_maxima;
-        } else if (h < getCapacidad_maxima()) {
-            Helper.mensaje(null, "No puede ingresar más café", "Error", 2);
         } else {
-            a = this.getCapacidad_actual() + h;
-            this.capacidad_actual = a;
+            a = getCapacidad_actual() + d;
+            if (a > getCapacidad_maxima()) {
+                Helper.mensaje(null, "No puede ingresar mas café", "Error", 1);
+            } else {
+                this.capacidad_actual = a;
+            }
             
         }
         
     }
-
+    
 }
