@@ -13,6 +13,11 @@ public class Cafetera {
 
     private int capacidad_maxima;
     private int capacidad_actual;
+    
+    public Cafetera() {
+        this.capacidad_maxima = 1000;
+        this.capacidad_actual = 0;
+    }
 
     public Cafetera(int capacidad_maxima, int capacidad_actual) {
         this.capacidad_maxima = capacidad_maxima;
@@ -20,15 +25,7 @@ public class Cafetera {
         if (this.capacidad_actual > this.capacidad_maxima) {
             this.capacidad_actual = this.capacidad_maxima;
             Helper.mensaje(null, "La capacidad actual ha sido ajustada a la maxima", "Mensaje", 1);
-
-        } else {
-            this.capacidad_maxima = capacidad_maxima;
-        }
-    }
-
-    public Cafetera() {
-        this.capacidad_maxima = 1000;
-        this.capacidad_actual = 0;
+        } 
     }
 
     public int getCapacidad_maxima() {
@@ -62,7 +59,6 @@ public class Cafetera {
 
      public void Vaciar(){
        this.capacidad_actual = 0;
-       this.capacidad_actual = this.getCapacidad_maxima();
    }
 
    public void AgregarCafe(int d){

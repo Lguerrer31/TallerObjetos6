@@ -210,7 +210,7 @@ public class Principal extends javax.swing.JFrame {
         }
 
         if (sw == 1) {
-            c = new Cafetera(a, b);
+            c = new Cafetera(b, a);
 
             Helper.mensaje(null, "Cafetera creada exitosamente, su nueva cantidad de cafe es: " + c.getCapacidad_actual(), "Mensaje", 1);
 
@@ -247,9 +247,13 @@ public class Principal extends javax.swing.JFrame {
 
         if (sw == 1) {
             c.AgregarCafe(h);
-
+            
+            if (c.getCapacidad_actual() >= c.getCapacidad_maxima()){
+                Helper.mensaje(null, "La cafetera se encuentra llena, no se puede ingresar más café", "Mensaje", 1);
+            } else {
             Helper.mensaje(null, "Agregado satisfactoriamente, su nueva cantidad de café es: " + c.getCapacidad_actual() + h, "Mensaje", 1);
             txtICafe.setText("");
+            }
         }
 
     }//GEN-LAST:event_cmdAgregarActionPerformed
@@ -281,11 +285,22 @@ public class Principal extends javax.swing.JFrame {
         }
 
         if (sw == 1) {
+            if (c.getCapacidad_actual() == 0){
+                Helper.mensaje(null, "Por favor ingrese café", "Error", 2);
+                txtCTazas.setText("");
+                txtITaza.setText("");
+                txtICafe.requestFocusInWindow();
+            } else if (c.getCapacidad_actual() < (j * k)) {
+                Helper.mensaje(null, "Queda poco café, servirá hasta donde alcance", "Mensaje", 1);
+                c.setCapacidad_actual(0); 
+                txtCTazas.setText("");
+                txtITaza.setText("");
+            } else {
             c.ServirTaza(j, k);
-
             Helper.mensaje(null, "Tazas servidas satisfactoriamente, su nueva cantidad en la cafetera es de: " + c.getCapacidad_actual(), "Mensaje", 1);
             txtITaza.setText("");
             txtCTazas.setText("");
+            }
         }
     }//GEN-LAST:event_cmdServirActionPerformed
 
